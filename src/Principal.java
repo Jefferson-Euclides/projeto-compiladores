@@ -81,7 +81,7 @@ public class Principal {
 				switch (token) {
 					case Linha:
 						cont++;
-						resultado += "LINEA " + cont + "\n";
+						resultado += "LINHA " + cont + "\n";
 						break;
 					case Barra:
 						resultado += "  <Barras>\t\t" + lexer.lexeme + "\n";
