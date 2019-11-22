@@ -1,0 +1,57 @@
+import java_cup.runtime.Symbol;
+
+parser code
+{:
+    private Symbol s;
+    
+    public void syntax_error(Symbol s){
+        this.s = s;
+    }
+
+    public Symbol getS(){
+        return this.s;
+}
+:};
+
+terminal Linha, Barra, T_dado, Cadeia, If, Else, Do, While,
+    Igual, Soma, Subtracao, Multiplicacao, Divisao, Op_logico, Op_relacional,
+    Op_booleano, Parenteses_a, Parenteses_f, Program, PontoVirgula, Identificador,
+    Then, All, Repeat, Until, Numero, ERROR;
+non terminal INICIO, SENTENCIA, DECLARACION, IF, IF_ELSE,
+    WHILE, DO_WHILE, SENTENCIA_BOOLEANA;
+
+start with INICIO;
+
+INICIO ::= 
+    Program 
+;
+SENTENCIA ::= 
+    SENTENCIA DECLARACION |
+    DECLARACION |
+    SENTENCIA IF | 
+    IF |
+    SENTENCIA IF_ELSE |
+    IF_ELSE |
+    SENTENCIA WHILE |
+    WHILE |
+    SENTENCIA DO_WHILE
+    DO_WHILE |
+;
+DECLARACION ::= 
+    T_dado Identificador PontoVirgula | 
+    T_dado Identificador Igual Numero PontoVirgula |
+;
+IF ::= If Parenteses_a SENTENCIA_BOOLEANA Parenteses_f  SENTENCIA 
+;
+SENTENCIA_BOOLEANA ::= 
+    Op_booleano | 
+    Identificador Op_relacional Op_booleano |
+    Identificador Op_relacional Numero |
+    Identificador Op_relacional Identificador |
+;
+IF_ELSE ::= If Parenteses_a SENTENCIA_BOOLEANA Parenteses_f  SENTENCIA  Else  SENTENCIA 
+;
+WHILE ::= While Parenteses_a SENTENCIA_BOOLEANA Parenteses_f  SENTENCIA 
+;
+DO_WHILE ::= Do  SENTENCIA  While Parenteses_a SENTENCIA_BOOLEANA Parenteses_f PontoVirgula
+;
