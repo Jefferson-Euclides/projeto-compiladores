@@ -22,13 +22,16 @@ espaco=[ ,\t,\r]+
 ( "\"" ) {lexeme=yytext(); return Tokens.Barra;}
 
 /* Tipos de dados */
-( Integer | Real | string ) {lexeme=yytext(); return Tokens.T_dado;}
+( Integer | Real | String ) {lexeme=yytext(); return Tokens.T_dado;}
 
 /* Tipo de dado String */
 ( String ) {lexeme=yytext(); return Tokens.Cadeia;}
 
 /* Palavra reservada Begin */
-( begin ) {lexeme=yytext(); return Tokens.Begin;}
+( Begin ) {lexeme=yytext(); return Tokens.Begin;}
+
+/* Palavra reservada End */
+( End ) {lexeme=yytext(); return Tokens.End;}
 
 /* Palavra reservada If */
 ( if ) {lexeme=yytext(); return Tokens.If;}
@@ -85,7 +88,7 @@ espaco=[ ,\t,\r]+
 ( ")" ) {lexeme=yytext(); return Tokens.Parenteses_f;}
 
 /* Marcador de inicio de algoritmo */
-( "program" ) {lexeme=yytext(); return Tokens.Program;}
+( "Program" ) {lexeme=yytext(); return Tokens.Program;}
 
 /* Ponto e virgula */
 ( ";" ) {lexeme=yytext(); return Tokens.PontoVirgula;}

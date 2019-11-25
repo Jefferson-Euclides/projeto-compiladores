@@ -4,12 +4,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.io.StringReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import java_cup.internal_error;
+import java_cup.runtime.Symbol;
 
 public class Principal {
 
@@ -23,14 +23,22 @@ public class Principal {
 		gerarCLI();
 	}
 
-	private static void gerarCLI() throws IOException {
+	private static void gerarCLI() {
 		String retorno = "";
 		//Scanner scan = new Scanner(System.in);
 
 		//System.out.println("Digite o caminho do arquivo de entrada: ");
 
-		retorno = analiseLexica("C:/Users/AlltaxSamsung00/eclipse-workspace/CompiladorMiniPascal/src/teste");
-		System.out.println(retorno);
+		try {
+			retorno = analiseLexica("C:/Users/AlltaxSamsung00/eclipse-workspace/CompiladorMiniPascal/src/teste");
+			System.out.println(retorno + "\n\n\n\n\n");
+			
+			System.out.println("ANÁLISE SINTÁTICA");
+			System.out.println(analiseSintatica("C:/Users/AlltaxSamsung00/eclipse-workspace/CompiladorMiniPascal/src/teste"));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	public static void gerar(String lexerPath, String lexerCupPath, String[] sintatico)
@@ -61,6 +69,20 @@ public class Principal {
 
 		Files.move(Paths.get("C:/Users/AlltaxSamsung00/eclipse-workspace/CompiladorMiniPascal/Sintax.java"),
 				Paths.get("C:/Users/AlltaxSamsung00/eclipse-workspace/CompiladorMiniPascal/src/Sintax.java"));
+	}
+	
+	public static String analiseSintatica(String path) throws FileNotFoundException {
+		Reader lector = new BufferedReader(new FileReader(path));
+		
+		Sintax s = new Sintax(new LexerCup(lector));
+		
+		try {
+			s.parse();
+			return "Análise sintática finalizada com sucesso.";
+		} catch (Exception e) {
+			Symbol sym = s.getS();
+			return "Erro de sintáxe. Linha: " + (sym.right + 1) + " Coluna: " + (sym.left + 1) + ", Texto: \"" + sym.value + "\"";
+		}
 	}
 
 	public static String analiseLexica(String path) throws FileNotFoundException {

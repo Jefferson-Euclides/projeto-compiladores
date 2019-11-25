@@ -29,10 +29,16 @@ espacio=[ ,\t,\r,\n]+
 ( "\"" ) {return new Symbol(sym.Barra, yychar, yyline, yytext());}
 
 /* Tipos de dados */
-( Integer | Real | string ) {return new Symbol(sym.T_dado, yychar, yyline, yytext());}
+( Integer | Real | String ) {return new Symbol(sym.T_dado, yychar, yyline, yytext());}
 
 /* Tipo de dado String */
 ( String ) {return new Symbol(sym.Cadeia, yychar, yyline, yytext());}
+
+/* Palavra reservada Begin */
+( Begin ) {return new Symbol(sym.Begin, yychar, yyline, yytext());}
+
+/* Palavra reservada End */
+( End ) {return new Symbol(sym.End, yychar, yyline, yytext());}
 
 /* Palavra reservada If */
 ( if ) {return new Symbol(sym.If, yychar, yyline, yytext());}
@@ -89,10 +95,13 @@ espacio=[ ,\t,\r,\n]+
 ( ")" ) {return new Symbol(sym.Parenteses_f, yychar, yyline, yytext());}
 
 /* Marcador de inicio de algoritmo */
-( "program" ) {return new Symbol(sym.Program, yychar, yyline, yytext());}
+( "Program" ) {return new Symbol(sym.Program, yychar, yyline, yytext());}
 
 /* Ponto e virgula */
 ( ";" ) {return new Symbol(sym.PontoVirgula, yychar, yyline, yytext());}
+
+/* Virgula */
+( "," ) {return new Symbol(sym.Virgula, yychar, yyline, yytext());}
 
 /* Identificador */
 {L}({L}|{D})* {return new Symbol(sym.Identificador, yychar, yyline, yytext());}
