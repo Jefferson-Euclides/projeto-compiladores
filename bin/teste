@@ -2,21 +2,22 @@ Program  teste;
 
 Integer i1;
 String s1;
+String s2;
 Integer i4;
 Real r1;
 
 Begin 
 	Begin 
-		I4 := 10;
-		I4 := 20;
-		I2 := 30;
-		R1 := 1,5;
-		I5 := i4;			
-		R2 := r1;
-		R3 : i1 + r1;
+		i4 := 10;
+		i4 := 20;
+		i2 := 30;
+		r1 := 1.5;
+		i5 := i4;			
+		r2 := r1;
+		r3 := i1 + r1;
 					
 		if (5 > r2) then 
-			All (s1, s2);
+			R3 := i1 + r1;
 		else 
 		Begin 
 			while (r2 < 100) do 

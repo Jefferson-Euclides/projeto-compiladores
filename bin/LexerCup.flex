@@ -62,7 +62,7 @@ espacio=[ ,\t,\r,\n]+
 ( repeat ) {return new Symbol(sym.Repeat, yychar, yyline, yytext());}
 
 /* Palavra reservada All */
-( all ) {return new Symbol(sym.All, yychar, yyline, yytext());}
+( All ) {return new Symbol(sym.All, yychar, yyline, yytext());}
 
 /* Operador Igual */
 ( ":=" ) {return new Symbol(sym.Igual, yychar, yyline, yytext());}
@@ -107,7 +107,7 @@ espacio=[ ,\t,\r,\n]+
 {L}({L}|{D})* {return new Symbol(sym.Identificador, yychar, yyline, yytext());}
 
 /* Numero */
-("(-"{D}+")")|{D}+ {return new Symbol(sym.Numero, yychar, yyline, yytext());}
+("(-"{D}+")")|{D}+|({D}"."{D}) {return new Symbol(sym.Numero, yychar, yyline, yytext());}
 
 /* Erro de analise */
  . {return new Symbol(sym.ERROR, yychar, yyline, yytext());}

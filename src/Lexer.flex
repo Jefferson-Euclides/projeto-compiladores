@@ -55,7 +55,7 @@ espaco=[ ,\t,\r]+
 ( repeat ) {lexeme=yytext(); return Tokens.Repeat;}
 
 /* Palavra reservada All */
-( all ) {lexeme=yytext(); return Tokens.All;}
+( All ) {lexeme=yytext(); return Tokens.All;}
 
 /* Operador Igual */
 ( ":=" ) {lexeme=yytext(); return Tokens.Igual;}
@@ -92,6 +92,9 @@ espaco=[ ,\t,\r]+
 
 /* Ponto e virgula */
 ( ";" ) {lexeme=yytext(); return Tokens.PontoVirgula;}
+
+/* Virgula */
+( "," ) {lexeme=yytext(); return Tokens.Virgula;}
 
 /* Identificador */
 {L}({L}|{D})* {lexeme=yytext(); return Tokens.Identificador;}

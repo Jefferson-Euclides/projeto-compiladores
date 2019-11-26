@@ -18,7 +18,7 @@ terminal Linha, Barra, T_dado, Cadeia, If, Else, Do, While, Igual, Op_logico, ER
     Then, All, Repeat, Until, Soma, Subtracao, Multiplicacao, Divisao, Numero;
     
 non terminal INICIO, SENTENCA, DECLARACAO, IF, IF_ELSE,
-    WHILE, DO_WHILE, SENTENCA_BOOLEANA, BEGIN;
+    WHILE, DO_WHILE, SENTENCA_BOOLEANA, BEGIN, ALL;
 
 start with INICIO;
 
@@ -27,18 +27,37 @@ INICIO ::=
 ;
 SENTENCA ::= 
     SENTENCA DECLARACAO | 
-    DECLARACAO |
+    DECLARACAO | 
     SENTENCA BEGIN | 
-    BEGIN
+    BEGIN | 
+    SENTENCA IF | 
+    IF | 
+    SENTENCA IF_ELSE | 
+    IF_ELSE | 
+    SENTENCA ALL | 
+    ALL
 ;
 DECLARACAO ::= 
     T_dado Identificador PontoVirgula | 
-    T_dado Identificador Igual Numero PontoVirgula
+    T_dado Identificador Igual Numero PontoVirgula | 
+    (Identificador Igual Identificador PontoVirgula | Identificador Igual Identificador Soma Identificador PontoVirgula) | 
+    Identificador Igual Numero PontoVirgula
 ;
-IF ::= If Parenteses_a SENTENCA_BOOLEANA Parenteses_f Then SENTENCA 
+IF ::= 
+	If Parenteses_a SENTENCA_BOOLEANA Parenteses_f Then
 ;
+
+IF_ELSE ::= 
+	If Parenteses_a SENTENCA_BOOLEANA Parenteses_f Then Else
+;
+
+ALL ::= 
+	All Parenteses_a Identificador Identificador Parenteses_f PontoVirgula	
+;
+
 SENTENCA_BOOLEANA ::= 
     Op_booleano | 
+    Numero Op_relacional Identificador | 
     Identificador Op_relacional Op_booleano |
     Identificador Op_relacional Numero |
     Identificador Op_relacional Identificador
@@ -47,8 +66,6 @@ SENTENCA_BOOLEANA ::=
 BEGIN ::= Begin SENTENCA End
 ;
 
-IF_ELSE ::= If Parenteses_a SENTENCA_BOOLEANA Parenteses_f  SENTENCA  Else  SENTENCA 
-;
 WHILE ::= While Parenteses_a SENTENCA_BOOLEANA Parenteses_f  Do SENTENCA 
 ;
 DO_WHILE ::= Do  SENTENCA  While Parenteses_a SENTENCA_BOOLEANA Parenteses_f PontoVirgula
