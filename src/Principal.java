@@ -78,7 +78,7 @@ public class Principal {
 		
 		try {
 			s.parse();
-			return "Análise sintática finalizada com sucesso.";
+			return "Compilação finalizada com sucesso.";
 		} catch (Exception e) {
 			Symbol sym = s.getS();
 			return "Erro de sintáxe. Linha: " + (sym.right + 1) + " Coluna: " + (sym.left + 1) + ", Texto: \"" + sym.value + "\"";
@@ -90,7 +90,7 @@ public class Principal {
 		Reader lector = new BufferedReader(new FileReader(path));
 		
 		Lexer lexer = new Lexer(lector);
-		String resultado = "LINEA " + cont + "\t\t\t\tSIMBOLO\n";
+		String resultado = "LINHA " + cont + "\t\t\t\tSIMBOLO\n";
 		while (true) {
 			Tokens token;
 			try {
@@ -169,7 +169,7 @@ public class Principal {
 						resultado += "  <Numero>\t\t" + lexer.lexeme + "\n";
 						break;
 					case ERROR:
-						resultado += "  <Simbolo não definido>\n";
+						resultado += "  <IDENTIFICADOR OU SIMBOLO INVÁLIDO>\n";
 						break;
 					default:
 						resultado += "  < " + lexer.lexeme + " >\n";

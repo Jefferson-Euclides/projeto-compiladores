@@ -8,7 +8,7 @@ import java_cup.runtime.*;
 %char
 L=[a-zA-Z_]+
 D=[0-9]+
-espacio=[ ,\t,\r,\n]+
+espaco=[ ,\t,\r,\n]+
 %{
     private Symbol symbol(int type, Object value){
         return new Symbol(type, yyline, yycolumn, value);
@@ -19,8 +19,8 @@ espacio=[ ,\t,\r,\n]+
 %}
 %%
 
-/* Espacios en blanco */
-{espacio} {/*Ignore*/}
+/* Espacos em branco */
+{espaco} {/*Ignore*/}
 
 /* Comentarios */
 ( "{"*(.)*"}" ) {/*Ignore*/}
@@ -99,6 +99,9 @@ espacio=[ ,\t,\r,\n]+
 
 /* Ponto e virgula */
 ( ";" ) {return new Symbol(sym.PontoVirgula, yychar, yyline, yytext());}
+
+/* Ponto */
+( "." ) {return new Symbol(sym.Ponto, yychar, yyline, yytext());}
 
 /* Virgula */
 ( "," ) {return new Symbol(sym.Virgula, yychar, yyline, yytext());}

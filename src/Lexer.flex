@@ -93,6 +93,9 @@ espaco=[ ,\t,\r]+
 /* Ponto e virgula */
 ( ";" ) {lexeme=yytext(); return Tokens.PontoVirgula;}
 
+/* Ponto */
+( "." ) {lexeme=yytext(); return Tokens.Ponto;}
+
 /* Virgula */
 ( "," ) {lexeme=yytext(); return Tokens.Virgula;}
 
