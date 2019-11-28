@@ -38,6 +38,7 @@ public enum Tokens {
     Op_logico,
     Op_relacional,
     Op_booleano,
+    Op_aritmetico,
     Parenteses_a,
     Parenteses_f,
     ERROR

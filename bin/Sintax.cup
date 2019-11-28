@@ -14,7 +14,7 @@ parser code
 :};
 
 terminal Linha, Barra, T_dado, Cadeia, If, Else, Do, While, Igual, Op_logico, ERROR, Begin, End, Virgula,
-	Op_relacional, Op_booleano, Parenteses_a, Parenteses_f, Program, Ponto, PontoVirgula, Identificador,
+	Op_relacional, Op_booleano, Op_Aritmeticos, Parenteses_a, Parenteses_f, Program, Ponto, PontoVirgula, Identificador,
     Then, All, Repeat, Until, Soma, Subtracao, Multiplicacao, Divisao, Numero;
     
 non terminal INICIO, SENTENCA, DECLARACAO, IF, ATRIBUICAO,
@@ -50,8 +50,22 @@ DECLARACAO ::=
 ATRIBUICAO ::= 
 	Identificador Igual Identificador PontoVirgula |
 	Identificador Igual Identificador Soma Identificador PontoVirgula | 
-	Identificador Igual Identificador Soma Numero PontoVirgula | 
-    Identificador Igual Numero PontoVirgula
+	Identificador Igual Identificador Soma Numero PontoVirgula |
+	Identificador Igual Identificador Divisao Identificador PontoVirgula | 
+	Identificador Igual Identificador Divisao Numero PontoVirgula |
+	Identificador Igual Identificador Subtracao Identificador PontoVirgula | 
+	Identificador Igual Identificador Subtracao Numero PontoVirgula | 
+	Identificador Igual Identificador Multiplicacao Identificador PontoVirgula | 
+	Identificador Igual Identificador Multiplicacao Numero PontoVirgula |
+    Identificador Igual Numero PontoVirgula | 
+    Identificador Igual Numero Soma Identificador PontoVirgula | 
+	Identificador Igual Numero Soma Numero PontoVirgula |
+	Identificador Igual Numero Subtracao Identificador PontoVirgula | 
+	Identificador Igual Numero Subtracao Numero PontoVirgula | 
+	Identificador Igual Numero Multiplicacao Identificador PontoVirgula | 
+	Identificador Igual Numero Multiplicacao Numero PontoVirgula | 
+	Identificador Igual Numero Divisao Identificador PontoVirgula | 
+	Identificador Igual Numero Divisao Numero PontoVirgula
 ;
 
 IF ::= 

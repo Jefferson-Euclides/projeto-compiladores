@@ -1,4 +1,4 @@
-Program  teste; %
+Program  teste;
 
 Integer i1;
 String s1;
@@ -14,7 +14,9 @@ Begin
 		r1 := 1.5;
 		i5 := i4;			
 		r2 := r1;
-		r3 := i1 + r1;
+		r4 := i1 + r1;
+		r3 := i1 / r1;
+		r5 := i1 * r1;
 					
 		if (5 > r2) then 
 			Begin
