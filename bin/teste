@@ -21,6 +21,10 @@ Begin
 		if (5 > r2) then 
 			Begin
 				R3 := i1 + r1;
+				
+				All(s1, s2);
+				
+				r4 := i2 * 2;
 			End;
 		else 
 			Begin
@@ -30,6 +34,14 @@ Begin
 		while (r2 < 100) do 
 			Begin
 				R2 := r2 + 1;
+				if (5 > r2) then 
+					Begin
+						R3 := i1 + r1;
+						
+						All(s1, s2);
+						
+						r4 := i2 * 2;
+					End;
 			End;
 		
 		All (s1, s2);
