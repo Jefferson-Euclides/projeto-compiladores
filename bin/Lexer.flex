@@ -7,6 +7,8 @@ espaco=[ ,\t,\r]+
 %{
     public String lexeme;
 %}
+%line
+%column
 %%
 
 /* Espacos em branco */
@@ -106,4 +108,4 @@ espaco=[ ,\t,\r]+
 ("(-"{D}+")")|{D}+ {lexeme=yytext(); return Tokens.Numero;}
 
 /* Erro na analise */
- . {return Tokens.ERROR;}
+ . {throw new RuntimeException("Identificador ou simbolo inválido \"" + yytext() + "\" na linha: " + (yyline + 1) + ", coluna: " + (yycolumn + 1));}
