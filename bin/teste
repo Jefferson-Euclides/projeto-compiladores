@@ -40,6 +40,10 @@ Begin
 						
 						All(s1, s2);
 						
+						repeat 
+							R3 := i1 + r1;
+						until ( 2 < r1 );
+						
 						r4 := i2 * 2;
 					End;
 			End;
