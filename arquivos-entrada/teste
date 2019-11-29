@@ -8,7 +8,7 @@ Real r1;
 
 Begin 
 	Begin 
-		i4 := 10; {TESTANDO}
+		i4 := 10; {TESTANDO COMENTARIO}
 		i4 := 20;
 		i2 := 30;
 		r1 := 1.5;
@@ -28,7 +28,7 @@ Begin
 			End;
 		else 
 			Begin
-			{TESTANDO}
+			{TESTANDO COMENTARIO}
 				R4 := i2 + i4;
 			End;
 		while (r2 < 100) do 

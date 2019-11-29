@@ -14,12 +14,13 @@ import java_cup.runtime.Symbol;
 
 public class Principal {
 	static final Scanner scan = new Scanner(System.in);
-
+	
+	
 	public static void main(String[] args) throws internal_error, IOException, Exception {
 		
-		String lexerPath = "C:/Users/AlltaxSamsung00/eclipse-workspace/CompiladorMiniPascal/src/Lexer.flex";
-		String lexerCupPath = "C:/Users/AlltaxSamsung00/eclipse-workspace/CompiladorMiniPascal/src/LexerCup.flex";
-		String sintaxCupPath = "C:/Users/AlltaxSamsung00/eclipse-workspace/CompiladorMiniPascal/src/Sintax.cup";
+		String lexerPath =  new File(".").getCanonicalPath().toString() + "\\src\\Lexer.flex";
+		String lexerCupPath = new File(".").getCanonicalPath().toString() + "\\src\\LexerCup.flex";
+		String sintaxCupPath = new File(".").getCanonicalPath().toString() + "\\src\\Sintax.cup";
 		String[] sintatico = { "-parser", "Sintax", sintaxCupPath };
 
 		gerar(lexerPath, lexerCupPath, sintatico);
@@ -27,18 +28,21 @@ public class Principal {
 	}
 
 	private static void gerarCLI() throws FileNotFoundException {
-		String retorno = "";
-
-		System.out.println("Digite o caminho do arquivo de entrada: ");
-		String path = scan.next();
 		
-		System.out.println("\n\n");
-		try {			
-			analiseLexica("C:/Users/AlltaxSamsung00/eclipse-workspace/CompiladorMiniPascal/src/teste");
+		try {	
+			
+			System.out.println("Digite o nome do arquivo de entrada: " );
+			String arquivo = scan.next();
+		
 			System.out.println("\n\n");
-			analiseSintatica("C:/Users/AlltaxSamsung00/eclipse-workspace/CompiladorMiniPascal/src/teste");
+				
+			analiseLexica(new File(".").getCanonicalPath().toString() + "\\arquivos-entrada\\" + arquivo);
+			System.out.println("\n\n");
+			analiseSintatica(new File(".").getCanonicalPath().toString() + "\\arquivos-entrada\\" + arquivo);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			System.out.println("\n\n");
+			novaOperacao();
 		}
 		
 	}
@@ -54,23 +58,44 @@ public class Principal {
 
 		java_cup.Main.main(sintatico);
 
-		Path rotaSym = Paths.get("C:/Users/AlltaxSamsung00/eclipse-workspace/CompiladorMiniPascal/src/sym.java");
+		Path rotaSym = Paths.get(new File(".").getCanonicalPath().toString() + "\\src\\sym.java");
 
 		if (Files.exists(rotaSym)) {
 			Files.delete(rotaSym);
 		}
 
-		Files.move(Paths.get("C:/Users/AlltaxSamsung00/eclipse-workspace/CompiladorMiniPascal/sym.java"),
-				Paths.get("C:/Users/AlltaxSamsung00/eclipse-workspace/CompiladorMiniPascal/src/sym.java"));
+		Files.move(Paths.get(new File(".").getCanonicalPath().toString() + "\\sym.java"),
+				Paths.get(new File(".").getCanonicalPath().toString() + "\\src\\sym.java"));
 
-		Path rotaSin = Paths.get("C:/Users/AlltaxSamsung00/eclipse-workspace/CompiladorMiniPascal/src/Sintax.java");
+		Path rotaSin = Paths.get(new File(".").getCanonicalPath().toString() + "\\src\\Sintax.java");
 
 		if (Files.exists(rotaSin)) {
 			Files.delete(rotaSin);
 		}
 
-		Files.move(Paths.get("C:/Users/AlltaxSamsung00/eclipse-workspace/CompiladorMiniPascal/Sintax.java"),
-				Paths.get("C:/Users/AlltaxSamsung00/eclipse-workspace/CompiladorMiniPascal/src/Sintax.java"));
+		Files.move(Paths.get(new File(".").getCanonicalPath().toString() + "\\Sintax.java"),
+				Paths.get(new File(".").getCanonicalPath().toString() + "\\src\\Sintax.java"));
+	}
+	
+	public static void novaOperacao() throws FileNotFoundException {
+		
+		System.out.println("\n\n");
+		System.out.println("Digite \"continuar\" para executar um novo código, ou \"sair\" para encerrar a aplicação: ");
+		String output = scan.next();
+		
+		switch (output.toLowerCase()) {
+		case "continuar":
+			gerarCLI();
+			break;
+
+		case "sair":
+			System.out.println("Compilação encerrada com sucesso.");
+			break;
+			
+		default:
+			novaOperacao();
+			break;
+		}
 	}
 	
 	public static void analiseSintatica(String path) throws FileNotFoundException {
@@ -81,9 +106,13 @@ public class Principal {
 		try {
 			s.parse();
 			System.out.println("Compilação finalizada com sucesso.");
+			System.out.println("\n\n");
+			novaOperacao();
 		} catch (Exception e) {
 			Symbol sym = s.getS();
 			System.out.println("Erro de sintáxe. Linha: " + (sym.right + 1) + " Coluna: " + (sym.left + 1) + ", Texto: \"" + sym.value + "\"");
+			System.out.println("\n\n");
+			gerarCLI();
 		}
 	}
 
